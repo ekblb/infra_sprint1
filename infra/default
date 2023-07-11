@@ -1,0 +1,85 @@
+server {
+    server_name 158.160.31.153 katurka-practicum.onthewifi.com;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+}
+
+    location /admin/ {
+	proxy_pass http://127.0.0.1:8000;
+
+}
+    location / {
+        root   /var/www/taski;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/katurka-practicum.onthewifi.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/katurka-practicum.onthewifi.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+server {
+    if ($host = katurka-practicum.onthewifi.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name 158.160.31.153 katurka-practicum.onthewifi.com;
+    return 404; # managed by Certbot
+
+
+}
+
+
+server {
+    server_name 158.160.31.153 practicum-ekblb.sytes.net;
+
+    location /media/ {
+        root /var/www/kittygram/;
+
+}
+    location /api/ {
+        proxy_pass http://127.0.0.1:8080;
+}
+
+    location /admin/ {
+        proxy_pass http://127.0.0.1:8080;
+
+}
+    location / {
+        root   /var/www/kittygram;
+        index  index.html index.htm;
+        try_files $uri /index.html;
+    }
+
+
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/practicum-ekblb.sytes.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/practicum-ekblb.sytes.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+
+server {
+    if ($host = practicum-ekblb.sytes.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    server_name 158.160.31.153 practicum-ekblb.sytes.net;
+    listen 80;
+    return 404; # managed by Certbot
+
+
+}

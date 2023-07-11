@@ -1,0 +1,5 @@
+IP: 158.160.31.153;
+name_taski: https://katurka-practicum.onthewifi.com/;
+name_kittygram: https://practicum-ekblb.sytes.net/;
+login: yc-balabaeva;
+password: 10052022;
